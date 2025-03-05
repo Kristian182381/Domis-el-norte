@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Button, TouchableOpacity } from 'react-native';
 
 const Login = ({ navigation }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
     const handleLogin = () => {
+        if (username === '' || password === '') {
+            setError('Both fields are required');
+            return;
+        }
         // Aquí puedes agregar la lógica de autenticación
         // Si la autenticación es exitosa, navega a la pantalla de home
         navigation.navigate('home');
@@ -27,7 +32,11 @@ const Login = ({ navigation }) => {
                 onChangeText={setPassword}
                 secureTextEntry
             />
+            {error ? <Text style={styles.error}>{error}</Text> : null}
             <Button title="Login" onPress={handleLogin} color="#ff8c00" />
+            <TouchableOpacity onPress={() => navigation.navigate('register')}>
+                <Text style={styles.registerLink}>Don't have an account? Register</Text>
+            </TouchableOpacity>
         </View>
     );
 };
@@ -52,6 +61,15 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#ff8c00',
         borderRadius: 5,
+    },
+    error: {
+        color: 'red',
+        marginBottom: 12,
+    },
+    registerLink: {
+        marginTop: 16,
+        color: '#ff8c00',
+        textDecorationLine: 'underline',
     },
 });
 
