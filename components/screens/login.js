@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TextInput, View, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native';
+import Button from '../common/button'; // Importa el componente de botón
 
 const Login = ({ navigation }) => {
     const [username, setUsername] = useState('');
@@ -33,7 +34,7 @@ const Login = ({ navigation }) => {
                 secureTextEntry
             />
             {error ? <Text style={styles.error}>{error}</Text> : null}
-            <Button title="Login" onPress={handleLogin} color="#ff8c00" />
+            <Button title="Login" onPress={handleLogin} style={styles.button} />
             <TouchableOpacity onPress={() => navigation.navigate('register')}>
                 <Text style={styles.registerLink}>Don't have an account? Register</Text>
             </TouchableOpacity>
@@ -64,6 +65,10 @@ const styles = StyleSheet.create({
     },
     error: {
         color: 'red',
+        marginBottom: 12,
+    },
+    button: {
+        backgroundColor: '#ff8c00',
         marginBottom: 12,
     },
     registerLink: {

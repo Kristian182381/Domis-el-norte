@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, TextInput, View, Button } from "react-native";
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebaseConfig';
+import { StyleSheet, Text, TextInput, View } from "react-native";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, realtimeDb } from "../../firebaseConfig";
+import { ref, set } from "firebase/database";
+import Button from "../common/button"; // Importa el componente de botón
 
 const Register = ({ navigation }) => {
     const [username, setUsername] = useState("");
@@ -11,8 +13,8 @@ const Register = ({ navigation }) => {
 
     const handleRegister = () => {
         // Validar los campos de entrada
-        if (username === '' || email === '' || password === '') {
-            setError('All fields are required');
+        if (username === "" || email === "" || password === "") {
+            setError("All fields are required");
             return;
         }
 
@@ -21,7 +23,14 @@ const Register = ({ navigation }) => {
             .then((userCredential) => {
                 // Registro exitoso
                 const user = userCredential.user;
-                console.log('User registered:', user);
+                console.log("User registered:", user);
+
+                // Guardar datos del usuario en Realtime Database
+                set(ref(realtimeDb, "users/" + user.uid), {
+                    username: username,
+                    email: email,
+                });
+
                 navigation.navigate("login");
             })
             .catch((error) => {
@@ -53,7 +62,7 @@ const Register = ({ navigation }) => {
                 secureTextEntry
             />
             {error ? <Text style={styles.error}>{error}</Text> : null}
-            <Button title="Register" onPress={handleRegister} color="#ff8c00" />
+            <Button title="Register" onPress={handleRegister} style={styles.button} />
         </View>
     );
 };
@@ -81,6 +90,10 @@ const styles = StyleSheet.create({
     },
     error: {
         color: "red",
+        marginBottom: 12,
+    },
+    button: {
+        backgroundColor: "#ff8c00",
         marginBottom: 12,
     },
 });
