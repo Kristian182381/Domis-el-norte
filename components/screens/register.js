@@ -14,11 +14,12 @@ const Register = ({ navigation }) => {
     const handleRegister = () => {
         // Validar los campos de entrada
         if (username === "" || email === "" || password === "") {
-            setError("All fields are required");
+            setError("Todos los campos son requeridos");
             return;
         }
 
         // Registrar usuario con Firebase
+        
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Registro exitoso
@@ -31,11 +32,13 @@ const Register = ({ navigation }) => {
                     email: email,
                 });
 
-                navigation.navigate("login");
-            })
-            .catch((error) => {
-                setError(error.message);
-            });
+        navigation.navigate("login");
+        
+    })
+    .catch((error) => {
+        setError(error.message);
+    });
+    
     };
 
     return (

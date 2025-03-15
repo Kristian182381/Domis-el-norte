@@ -11,11 +11,22 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="login">
-        <Stack.Screen name="login" component={Login} />
-        <Stack.Screen name="home" component={Home} />
-        <Stack.Screen name="register" component={Register} />
-      </Stack.Navigator>
+      <Stack.Navigator 
+      initialRouteName="login"
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: '#C70039', // Cambia el color de fondo del header
+          },
+          headerTintColor: '#fff', // Cambia el color del texto y los iconos
+          headerTitleStyle: {
+            fontWeight: 'bold', // Opcional: cambia el estilo del título
+          },
+        }}
+      >
+          <Stack.Screen name="login" component={Login} />
+          <Stack.Screen name="home" component={Home} />
+          <Stack.Screen name="register" component={Register} />
+        </Stack.Navigator>
     </NavigationContainer>
   );
 }

@@ -1,20 +1,38 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../firebaseConfig';
 import Button from '../common/button'; // Importa el componente de botón
 
 const Login = ({ navigation }) => {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
     const handleLogin = () => {
-        if (username === '' || password === '') {
+        /*
+        if (email === '' || password === '') {
             setError('Both fields are required');
             return;
         }
-        // Aquí puedes agregar la lógica de autenticación
-        // Si la autenticación es exitosa, navega a la pantalla de home
-        navigation.navigate('home');
+            */
+
+        // Autenticación con Firebase
+        /*
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Autenticación exitosa
+                const user = userCredential.user;
+                console.log('User logged in:', user);
+                */
+                navigation.navigate('home');
+                /*
+            })
+                
+            .catch((error) => {
+                setError(error.message);
+            });
+            */
     };
 
     return (
@@ -22,9 +40,10 @@ const Login = ({ navigation }) => {
             <Text style={styles.title}>Login</Text>
             <TextInput
                 style={styles.input}
-                placeholder="Username"
-                value={username}
-                onChangeText={setUsername}
+                placeholder="Email"
+                value={email}
+                onChangeText={setEmail}
+                keyboardType="email-address"
             />
             <TextInput
                 style={styles.input}
