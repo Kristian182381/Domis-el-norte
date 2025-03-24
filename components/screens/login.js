@@ -72,14 +72,14 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
         marginBottom: 24,
-        color: '#ff8c00',
+        color: '#FFC107',
     },
     input: {
         width: '100%',
         padding: 10,
         marginBottom: 12,
         borderWidth: 1,
-        borderColor: '#ff8c00',
+        borderColor: '#FFC107',
         borderRadius: 5,
     },
     error: {
@@ -87,12 +87,12 @@ const styles = StyleSheet.create({
         marginBottom: 12,
     },
     button: {
-        backgroundColor: '#ff8c00',
+        backgroundColor: '#FFC107',
         marginBottom: 12,
     },
     registerLink: {
         marginTop: 16,
-        color: '#ff8c00',
+        color: '#FFC107',
         textDecorationLine: 'underline',
     },
 });

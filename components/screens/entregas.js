@@ -3,11 +3,11 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import Toolbar from "../common/toolbar";
 
 
-const Home = ({navigation}) => {
+const Entregas = ({navigation}) => {
     return (
         <View StyleSheet={StyleSheet.container}>
-            <Text styles={StyleSheet.title}>Home</Text>
-            <Toolbar navigation={navigation} currentScreen="home"/>
+            <Text styles={StyleSheet.title}>Entregas</Text>
+            <Toolbar navigation={navigation} currentScreen="entregas"/>
         </View>
     )
 };
@@ -20,4 +20,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Home;
+export default Entregas;
